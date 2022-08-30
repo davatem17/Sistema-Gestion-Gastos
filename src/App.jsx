@@ -6,6 +6,7 @@ import Modal from './components/Modal'
 import { generarId } from './helpers'
 import IconoNuevoGasto from './img/nuevo-gasto.svg'
 
+
 function App() {
 
   const [gastos, setGastos] = useState(
@@ -94,6 +95,7 @@ function App() {
   }
 
   return (
+    
       <div className={modal ? 'fijar' : '' }>
         <Header 
             gastos={gastos}
@@ -139,6 +141,7 @@ function App() {
                   />}
 
       </div>
+     // <Login/>
   )
 }
 
