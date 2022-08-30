@@ -1,10 +1,41 @@
 import React, {useState, useContext} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import AppContext from "../context/AppContext";
-import '../Login.css'
+import '../Login.css';
+import axios from 'axios';
 
+//const dev = process.env.API_DEV;
+const API_DEV = 'http://localhost:8000';
 
 const Login = () => {
+    const navigate = useNavigate();
+    const {addToEq} = useContext(AppContext);
+    const API = `${API_DEV}/api/login`;
+
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
+    });
+
+    const handleChange = (e) => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        });
+    }
+    const{email, password} = user;
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('VER', e.data);
+        axios.post(API, {email,password}).then(res => {
+        
+            addToEq(res.data.accessToken);
+            navigate('/prueba');
+        }).catch(err => {
+            console.log('error')
+        })
+        
+    }
     return ( 
         <section className="vh-100 gradient-custom">
     <div className="container py-5 h-100">
@@ -15,16 +46,16 @@ const Login = () => {
                         <div className="mb-md-5 mt-md-4 pb-5">
                             <h2 className="fw-bold mb-2 text-uppercase">Inicio de Sesión</h2>
                             <br />
-                            <form className="login100-form validate-form" >
+                            <form className="login100-form validate-form" onSubmit={handleSubmit}>
                                 <div className="form-outline form-white mb-4">
                                     <input type="email"  className="form-control form-control-lg"
-                                       name="email" placeholder="Correo Electronico" />
+                                        name="email" placeholder="Correo Electronico" onChange={handleChange} />
                                     <label className="form-label">Correo</label>
                                 </div>
                                 <div className="form-outline form-white mb-4">
                                     <input type="password"  className="form-control form-control-lg"
                                         name="password" pattern="[A-Za-z0-9_-]{1,15}" requiered
-                                        placeholder="Contraseña" />
+                                        placeholder="Contraseña" onChange={handleChange}/>
                                     <label className="form-label" for="typePasswordX">Contraseña</label>
                                 </div>
                                 <button className="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
