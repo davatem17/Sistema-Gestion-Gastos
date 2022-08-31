@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Prueba from './components/Prueba';
 import AppContext from './context/AppContext'
 import useInitialState from './hooks/useInitialState'
+import Principal from './components/Principal';
 
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/prueba' element={<Prueba/>}/>
+        <Route path='/principal' element={<Principal/>}/>
       </Routes>
       </BrowserRouter>
     </AppContext.Provider>
