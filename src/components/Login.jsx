@@ -30,7 +30,7 @@ const Login = () => {
             
             addToEq(res.data.accessToken);
             
-            navigate('/prueba');
+            navigate('/principal');
         }).catch(err => {
             console.log('error')
         })
