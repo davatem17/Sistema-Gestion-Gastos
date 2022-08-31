@@ -10,7 +10,6 @@ const API_DEV = 'http://localhost:8000';
 const Login = () => {
     const navigate = useNavigate();
     const {addToEq} = useContext(AppContext);
-    const {addUserId} = useContext(AppContext);
     const API = `${API_DEV}/api/login`;
 
     const [users, setUser] = useState({
@@ -30,7 +29,6 @@ const Login = () => {
         axios.post(API, {email,password}).then(res => {
             
             addToEq(res.data.accessToken);
-            addUserId(res.data.user.id);
             
             navigate('/prueba');
         }).catch(err => {
