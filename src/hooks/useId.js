@@ -1,23 +1,23 @@
 import { useState } from "react";
 
 const initialState = {
-    accessToken: {}
+    userId: {}
 }
 
-const useInitialState = () => {
+const useId = () => {
     const [state, setState] = useState(initialState);
 
-    const addToEq = (payload) => {
+    const addUserId = (payload) => {
         setState({
             ...state,
-            accessToken: {...state.accessToken, payload},
+            userId: {...state.userId, payload},
         });
     }
 
     return {
         state,
-        addToEq
+        addUserId
     }
 }
 
-export default useInitialState;
+export default useId;

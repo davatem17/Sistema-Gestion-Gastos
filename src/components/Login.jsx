@@ -10,26 +10,28 @@ const API_DEV = 'http://localhost:8000';
 const Login = () => {
     const navigate = useNavigate();
     const {addToEq} = useContext(AppContext);
+    const {addUserId} = useContext(AppContext);
     const API = `${API_DEV}/api/login`;
 
-    const [user, setUser] = useState({
+    const [users, setUser] = useState({
         email: '',
         password: ''
     });
 
     const handleChange = (e) => {
         setUser({
-            ...user,
+            ...users,
             [e.target.name]: e.target.value
         });
     }
-    const{email, password} = user;
+    const{email, password} = users;
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('VER', e.data);
         axios.post(API, {email,password}).then(res => {
-        
+            
             addToEq(res.data.accessToken);
+            addUserId(res.data.user.id);
+            
             navigate('/prueba');
         }).catch(err => {
             console.log('error')
